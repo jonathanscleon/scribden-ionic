@@ -16,6 +16,9 @@ export class AppRoot {
           <ion-route url="/note/:itemId" component="note-page" />
           <ion-route url="/reminder/:itemId" component="reminder-page" />
           <ion-route url="/tags/:itemId" component="tag-page" />
+          <ion-route url="/login" component="login-page" />
+          <ion-route url="/register" component="register-page" />
+          <ion-route url="/forgot-password" component="forgot-password-page" />
         </ion-router>
         <ion-nav />
       </ion-app>

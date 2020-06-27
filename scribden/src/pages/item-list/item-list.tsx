@@ -8,6 +8,10 @@ import { ItemService } from '../../services/item';
 export class ItemListPage {
     @State() filter: string = '';
 
+    componentDidLoad() {
+      // @TODO: check auth and redirect if not authenticated
+    }
+
     filterList(evt) {
       this.filter = evt.target.value;
     }

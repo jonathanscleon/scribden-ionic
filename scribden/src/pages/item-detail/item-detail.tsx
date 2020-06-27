@@ -32,6 +32,11 @@ export class ItemDetailPage {
                     ></note-editor>
                 )}
                 {item && (
+                    <reminder-form
+                        item={item}
+                    ></reminder-form>
+                )}
+                {item && (
                     <tag-form
                         item={item}
                     ></tag-form>

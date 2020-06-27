@@ -15,6 +15,8 @@ export namespace Components {
     interface ChecklistPage {
         "itemId": string;
     }
+    interface ForgotPasswordPage {
+    }
     interface ItemDetailPage {
         "itemId": string;
     }
@@ -22,6 +24,8 @@ export namespace Components {
         "item": ItemType;
     }
     interface ItemListPage {
+    }
+    interface LoginPage {
     }
     interface NoteEditor {
         "item": ItemType;
@@ -32,6 +36,8 @@ export namespace Components {
     interface QuickAdd {
         "add": Function;
         "label": string;
+    }
+    interface RegisterPage {
     }
     interface ReminderForm {
         "item": ItemType;
@@ -65,6 +71,12 @@ declare global {
         prototype: HTMLChecklistPageElement;
         new (): HTMLChecklistPageElement;
     };
+    interface HTMLForgotPasswordPageElement extends Components.ForgotPasswordPage, HTMLStencilElement {
+    }
+    var HTMLForgotPasswordPageElement: {
+        prototype: HTMLForgotPasswordPageElement;
+        new (): HTMLForgotPasswordPageElement;
+    };
     interface HTMLItemDetailPageElement extends Components.ItemDetailPage, HTMLStencilElement {
     }
     var HTMLItemDetailPageElement: {
@@ -83,6 +95,12 @@ declare global {
         prototype: HTMLItemListPageElement;
         new (): HTMLItemListPageElement;
     };
+    interface HTMLLoginPageElement extends Components.LoginPage, HTMLStencilElement {
+    }
+    var HTMLLoginPageElement: {
+        prototype: HTMLLoginPageElement;
+        new (): HTMLLoginPageElement;
+    };
     interface HTMLNoteEditorElement extends Components.NoteEditor, HTMLStencilElement {
     }
     var HTMLNoteEditorElement: {
@@ -100,6 +118,12 @@ declare global {
     var HTMLQuickAddElement: {
         prototype: HTMLQuickAddElement;
         new (): HTMLQuickAddElement;
+    };
+    interface HTMLRegisterPageElement extends Components.RegisterPage, HTMLStencilElement {
+    }
+    var HTMLRegisterPageElement: {
+        prototype: HTMLRegisterPageElement;
+        new (): HTMLRegisterPageElement;
     };
     interface HTMLReminderFormElement extends Components.ReminderForm, HTMLStencilElement {
     }
@@ -129,12 +153,15 @@ declare global {
         "app-root": HTMLAppRootElement;
         "check-list": HTMLCheckListElement;
         "checklist-page": HTMLChecklistPageElement;
+        "forgot-password-page": HTMLForgotPasswordPageElement;
         "item-detail-page": HTMLItemDetailPageElement;
         "item-list-item": HTMLItemListItemElement;
         "item-list-page": HTMLItemListPageElement;
+        "login-page": HTMLLoginPageElement;
         "note-editor": HTMLNoteEditorElement;
         "note-page": HTMLNotePageElement;
         "quick-add": HTMLQuickAddElement;
+        "register-page": HTMLRegisterPageElement;
         "reminder-form": HTMLReminderFormElement;
         "reminder-page": HTMLReminderPageElement;
         "tag-form": HTMLTagFormElement;
@@ -150,6 +177,8 @@ declare namespace LocalJSX {
     interface ChecklistPage {
         "itemId"?: string;
     }
+    interface ForgotPasswordPage {
+    }
     interface ItemDetailPage {
         "itemId"?: string;
     }
@@ -157,6 +186,8 @@ declare namespace LocalJSX {
         "item"?: ItemType;
     }
     interface ItemListPage {
+    }
+    interface LoginPage {
     }
     interface NoteEditor {
         "item"?: ItemType;
@@ -167,6 +198,8 @@ declare namespace LocalJSX {
     interface QuickAdd {
         "add"?: Function;
         "label"?: string;
+    }
+    interface RegisterPage {
     }
     interface ReminderForm {
         "item"?: ItemType;
@@ -184,12 +217,15 @@ declare namespace LocalJSX {
         "app-root": AppRoot;
         "check-list": CheckList;
         "checklist-page": ChecklistPage;
+        "forgot-password-page": ForgotPasswordPage;
         "item-detail-page": ItemDetailPage;
         "item-list-item": ItemListItem;
         "item-list-page": ItemListPage;
+        "login-page": LoginPage;
         "note-editor": NoteEditor;
         "note-page": NotePage;
         "quick-add": QuickAdd;
+        "register-page": RegisterPage;
         "reminder-form": ReminderForm;
         "reminder-page": ReminderPage;
         "tag-form": TagForm;
@@ -203,12 +239,15 @@ declare module "@stencil/core" {
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "check-list": LocalJSX.CheckList & JSXBase.HTMLAttributes<HTMLCheckListElement>;
             "checklist-page": LocalJSX.ChecklistPage & JSXBase.HTMLAttributes<HTMLChecklistPageElement>;
+            "forgot-password-page": LocalJSX.ForgotPasswordPage & JSXBase.HTMLAttributes<HTMLForgotPasswordPageElement>;
             "item-detail-page": LocalJSX.ItemDetailPage & JSXBase.HTMLAttributes<HTMLItemDetailPageElement>;
             "item-list-item": LocalJSX.ItemListItem & JSXBase.HTMLAttributes<HTMLItemListItemElement>;
             "item-list-page": LocalJSX.ItemListPage & JSXBase.HTMLAttributes<HTMLItemListPageElement>;
+            "login-page": LocalJSX.LoginPage & JSXBase.HTMLAttributes<HTMLLoginPageElement>;
             "note-editor": LocalJSX.NoteEditor & JSXBase.HTMLAttributes<HTMLNoteEditorElement>;
             "note-page": LocalJSX.NotePage & JSXBase.HTMLAttributes<HTMLNotePageElement>;
             "quick-add": LocalJSX.QuickAdd & JSXBase.HTMLAttributes<HTMLQuickAddElement>;
+            "register-page": LocalJSX.RegisterPage & JSXBase.HTMLAttributes<HTMLRegisterPageElement>;
             "reminder-form": LocalJSX.ReminderForm & JSXBase.HTMLAttributes<HTMLReminderFormElement>;
             "reminder-page": LocalJSX.ReminderPage & JSXBase.HTMLAttributes<HTMLReminderPageElement>;
             "tag-form": LocalJSX.TagForm & JSXBase.HTMLAttributes<HTMLTagFormElement>;
