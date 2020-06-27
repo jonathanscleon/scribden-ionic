@@ -39,6 +39,12 @@ export namespace Components {
     interface ReminderPage {
         "itemId": string;
     }
+    interface TagForm {
+        "item": ItemType;
+    }
+    interface TagPage {
+        "itemId": string;
+    }
 }
 declare global {
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
@@ -107,6 +113,18 @@ declare global {
         prototype: HTMLReminderPageElement;
         new (): HTMLReminderPageElement;
     };
+    interface HTMLTagFormElement extends Components.TagForm, HTMLStencilElement {
+    }
+    var HTMLTagFormElement: {
+        prototype: HTMLTagFormElement;
+        new (): HTMLTagFormElement;
+    };
+    interface HTMLTagPageElement extends Components.TagPage, HTMLStencilElement {
+    }
+    var HTMLTagPageElement: {
+        prototype: HTMLTagPageElement;
+        new (): HTMLTagPageElement;
+    };
     interface HTMLElementTagNameMap {
         "app-root": HTMLAppRootElement;
         "check-list": HTMLCheckListElement;
@@ -119,6 +137,8 @@ declare global {
         "quick-add": HTMLQuickAddElement;
         "reminder-form": HTMLReminderFormElement;
         "reminder-page": HTMLReminderPageElement;
+        "tag-form": HTMLTagFormElement;
+        "tag-page": HTMLTagPageElement;
     }
 }
 declare namespace LocalJSX {
@@ -154,6 +174,12 @@ declare namespace LocalJSX {
     interface ReminderPage {
         "itemId"?: string;
     }
+    interface TagForm {
+        "item"?: ItemType;
+    }
+    interface TagPage {
+        "itemId"?: string;
+    }
     interface IntrinsicElements {
         "app-root": AppRoot;
         "check-list": CheckList;
@@ -166,6 +192,8 @@ declare namespace LocalJSX {
         "quick-add": QuickAdd;
         "reminder-form": ReminderForm;
         "reminder-page": ReminderPage;
+        "tag-form": TagForm;
+        "tag-page": TagPage;
     }
 }
 export { LocalJSX as JSX };
@@ -183,6 +211,8 @@ declare module "@stencil/core" {
             "quick-add": LocalJSX.QuickAdd & JSXBase.HTMLAttributes<HTMLQuickAddElement>;
             "reminder-form": LocalJSX.ReminderForm & JSXBase.HTMLAttributes<HTMLReminderFormElement>;
             "reminder-page": LocalJSX.ReminderPage & JSXBase.HTMLAttributes<HTMLReminderPageElement>;
+            "tag-form": LocalJSX.TagForm & JSXBase.HTMLAttributes<HTMLTagFormElement>;
+            "tag-page": LocalJSX.TagPage & JSXBase.HTMLAttributes<HTMLTagPageElement>;
         }
     }
 }

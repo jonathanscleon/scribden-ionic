@@ -15,6 +15,7 @@ export class AppRoot {
           <ion-route url="/checklist/:itemId" component="checklist-page" />
           <ion-route url="/note/:itemId" component="note-page" />
           <ion-route url="/reminder/:itemId" component="reminder-page" />
+          <ion-route url="/tags/:itemId" component="tag-page" />
         </ion-router>
         <ion-nav />
       </ion-app>

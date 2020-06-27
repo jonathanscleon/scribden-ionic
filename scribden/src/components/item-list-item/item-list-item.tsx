@@ -4,6 +4,7 @@ import { ItemType } from '../../interfaces/item';
 import { ChecklistService } from '../../services/checklist';
 import { NoteService } from '../../services/note';
 import { ReminderService } from '../../services/reminder';
+import { TagService } from '../../services/tags';
 
 @Component({
     tag: 'item-list-item'
@@ -35,6 +36,7 @@ export class ItemListItem {
         const checklist = ChecklistService.getList(this.item.id);
         const note = NoteService.getNote(this.item.id);
         const reminder = ReminderService.getReminder(this.item.id);
+        const tags = TagService.getTags(this.item.id);
 
         if (checklist) {
             summary.push(
@@ -59,6 +61,21 @@ export class ItemListItem {
                 <ion-item>
                     <ion-router-link href={`/reminder/${this.item.id}`}>
                         Reminder
+                    </ion-router-link>
+                </ion-item>
+            )
+        }
+        if (tags && tags.length) {
+            summary.push(
+                <ion-item>
+                    <ion-router-link href={`/tag/${this.item.id}`}>
+                        <ion-item-group>
+                            {tags.map((tag) => (
+                                <ion-chip>
+                                    <ion-label>{tag}</ion-label>
+                                </ion-chip>
+                            ))}
+                        </ion-item-group>
                     </ion-router-link>
                 </ion-item>
             )

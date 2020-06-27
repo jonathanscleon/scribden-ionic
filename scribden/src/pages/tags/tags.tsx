@@ -2,9 +2,9 @@ import { Component, Prop, h, State } from '@stencil/core';
 import { ItemService } from '../../services/item';
 
 @Component({
-    tag: 'item-detail-page'
+    tag: 'tag-page'
 })
-export class ItemDetailPage {
+export class TagPage {
     @Prop() itemId: string;
     @State() id: number;
 
@@ -22,20 +22,9 @@ export class ItemDetailPage {
             </ion-header>,
             <ion-content class="ion-padding">
                 {item && (
-                    <check-list
-                        item={item}
-                    ></check-list>
-                )}
-                {item && (
-                    <note-editor
-                        item={item}
-                    ></note-editor>
-                )}
-                {item && (
-                    <tag-form
-                        item={item}
-                    ></tag-form>
-                )}
+                <tag-form
+                    item={item}
+                ></tag-form>)}
             </ion-content>
         ];
     }
