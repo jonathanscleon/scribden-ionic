@@ -1,8 +1,13 @@
 import '@ionic/core';
-// import { setupConfig } from '@ionic/core';
+// import { setupConfig } from '../helpers/environmentConfig';
 
 export default () => {
-  // setupConfig({
-  //   mode: 'ios'
-  // });
+  /*
+    setupConfig({
+      projectURL: '',
+      projectID: '',
+      key: '',
+      secret: ''
+    })
+  */
 };

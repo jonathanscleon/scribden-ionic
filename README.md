@@ -15,5 +15,3 @@ Local Data integration
 - If cordova plugin is not available, use backend API directly
 
 MVP action: Use backend API first
-
-MVP action: Looks like I'll need to build auth first

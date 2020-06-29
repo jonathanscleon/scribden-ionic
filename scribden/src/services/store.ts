@@ -1,11 +1,13 @@
 import { createStore } from '@stencil/store';
 import { get, set } from './storage';
+import { db } from './syncStore';
 
 // @TODO: optimize
 const shouldUpdate = () => true;
 
 const { state, on } = createStore({
-    items: []
+    db,
+    items: [],
 }, shouldUpdate);
 
 (async () => {
@@ -18,6 +20,7 @@ on('set', (key, newValue) => {
 });
 
 export const store = {
-    get: (key: string) => state[key],
+    get: (key: string) => state[key], // local store only calls here
+    fetch: (key: string) => {}, // @TODO; make db calls here
     set: (key: string, value: any) => state[key] = value
 };

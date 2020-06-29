@@ -1,0 +1,3 @@
+.env.development
+scribden/src/global/app-dev.ts
+node_modules
