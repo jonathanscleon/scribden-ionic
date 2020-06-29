@@ -1,5 +1,9 @@
 export interface ItemType {
     id: number,
     name: string,
-    behaviors: any
+    parentId: number,
+    isFolder: boolean,
+    behaviors: any,
+    created_at: string,
+    updated_at: string
 }

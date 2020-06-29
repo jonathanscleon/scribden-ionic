@@ -6,8 +6,7 @@ import { db } from './syncStore';
 const shouldUpdate = () => true;
 
 const { state, on } = createStore({
-    db,
-    items: [],
+    items: []
 }, shouldUpdate);
 
 (async () => {
@@ -20,7 +19,7 @@ on('set', (key, newValue) => {
 });
 
 export const store = {
+    db,
     get: (key: string) => state[key], // local store only calls here
-    fetch: (key: string) => {}, // @TODO; make db calls here
     set: (key: string, value: any) => state[key] = value
 };

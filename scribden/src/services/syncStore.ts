@@ -1,10 +1,12 @@
-import { jexiaClient, dataOperations } from 'jexia-sdk-js/browser';
+// import { jexiaClient, dataOperations } from 'jexia-sdk-js/browser';
 import { getConfig } from '../helpers/environmentConfig';
 
-const dataModule = dataOperations();
+declare var jexia: any;
+
+const dataModule = jexia.dataOperations();
 
 const credentials = getConfig();
 
-jexiaClient().init(credentials as any, dataModule);
+jexia.jexiaClient().init(credentials as any, dataModule);
 
 export const db = dataModule;
