@@ -10,6 +10,7 @@ export class ItemDetailPage {
 
     componentDidLoad() {
         this.id = parseInt(this.itemId);
+        ItemService.fetchItem(this.id);
     }
 
     render() {

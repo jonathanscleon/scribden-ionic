@@ -1,6 +1,5 @@
 import { Component, State, h } from '@stencil/core';
 import { ItemService } from '../../services/item';
-import { ItemSyncService } from '../../services/itemSync';
 
 @Component({
     tag: 'item-list-page',
@@ -11,7 +10,7 @@ export class ItemListPage {
 
     componentDidLoad() {
       // @TODO: check auth and redirect if not authenticated
-      ItemSyncService.fetchAll();
+      ItemService.fetchAll();
     }
 
     filterList(evt) {
