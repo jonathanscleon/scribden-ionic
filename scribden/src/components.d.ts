@@ -10,7 +10,7 @@ export namespace Components {
     interface AppRoot {
     }
     interface CheckList {
-        "item": ItemType;
+        "itemId": string;
     }
     interface ChecklistPage {
         "itemId": string;
@@ -172,7 +172,7 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface CheckList {
-        "item"?: ItemType;
+        "itemId"?: string;
     }
     interface ChecklistPage {
         "itemId"?: string;

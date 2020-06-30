@@ -20,7 +20,7 @@ export async function presentBehaviorActionSheet(item: ItemType) {
       text: 'Checklist',
       icon: 'checkbox',
       handler: () => {
-        ChecklistService.createList(item);
+        ChecklistService.createList(item.id);
         navigate('checklist');
       }
     },

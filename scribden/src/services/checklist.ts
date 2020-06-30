@@ -1,64 +1,95 @@
-import { ItemService } from '../services/item';
-import { ItemType } from '../interfaces/item';
-import { ChecklistType } from '../interfaces/checklist';
+import { ChecklistItemType, ChecklistType } from '../interfaces/checklist';
+import { store } from './store';
 
 class ChecklistServiceController {
-    private getItem(itemId: string): ItemType {
-        return ItemService.getItem(itemId);
-    }
+  fetchChecklist(itemId: string): void {
+    console.log('FETCH CHECKLIST');
+    store.db.dataset('Checklists')
+      .select()
+      .where(field => field('itemId').isEqualTo(itemId))
+      .related('ChecklistItems', checklistItems => checklistItems.fields('checklistId', 'name'))
+      .subscribe((records) => {
+        console.log(records);
+        const behaviors = store.getBehaviors(itemId);
+        behaviors.checklist = records[0];
+        store.setBehaviors(itemId, behaviors);
 
-    createList(item: ItemType): void {
-        item.behaviors.checklist = [];
+        store.db.dataset('ChecklistItems')
+          .select()
+          .where(field => field('checklistId').isEqualTo(behaviors.checklist.id))
+          .subscribe((records) => {
+            console.log(records);
+          })
+      },
+        (error) => console.error(error)
+      );
+  }
 
-        ItemService.updateItem(item);
-    }
+  createList(itemId: string): void {
+    store.db.dataset('Checklists')
+      .insert({ itemId })
+      .subscribe(() => {
+        const behaviors = store.getBehaviors(itemId);
+        behaviors.checklist = [];
+        store.setBehaviors(itemId, behaviors);
+      },
+        (error) => console.error(error)
+      );
+  }
 
-    getList(itemId: string): ChecklistType {
-        let item: ItemType = this.getItem(itemId);
+  getList(itemId: string): ChecklistType {
+    const behaviors = store.getBehaviors(itemId);
+    return behaviors.checklist;
+  }
 
-        return item && item.behaviors.checklist;
-    }
+  deleteList(itemId: string): void {
+    store.db.dataset('ChecklistItems')
+      .delete()
+      .related('Checklists')
+      .where(field => field('itemId').isEqualTo(itemId))
+      .subscribe(() => {
+        const behaviors = store.getBehaviors(itemId);
+        behaviors.checklist = null;
+        store.setBehaviors(itemId, behaviors);
+      })
+  }
 
-    updateList(itemId: string, checklist: ChecklistType): void {
-        let item: ItemType = this.getItem(itemId);
-        item.behaviors.checklist = checklist;
+  addListItem(itemId: string, checklistId: string, name: string): void {
+    store.db.dataset('ChecklistItems')
+      .insert({ checklistId, name })
+      .subscribe((records) => {
+        const behaviors = store.getBehaviors(itemId);
+        behaviors.checklist.ChecklistItems = [
+          ...behaviors.checklist.ChecklistItems,
+          records[0]
+        ];
+        store.setBehaviors(itemId, behaviors);
+      })
+  }
 
-        ItemService.updateItem(item);
-    }
+  updateListItem(itemId: string, checklistItem: ChecklistItemType) {
+    store.db.dataset('ChecklistItems')
+      .update(checklistItem)
+      .where(field => field('id').isEqualTo(checklistItem.id))
+      .subscribe(() => {
+        const behaviors = store.getBehaviors(itemId);
+        const idx = behaviors.checklist.ChecklistItems.indexOf(checklistItem);
+        behaviors.checklist.ChecklistItems[idx] = checklistItem;
+        store.setBehaviors(itemId, behaviors);
+      })
+  }
 
-    deleteList(itemId: string): void {
-        let item: ItemType = this.getItem(itemId);
-        delete item.behaviors.checklist;
-
-        ItemService.updateItem(item);
-    }
-
-    addListItem(itemId: string, todo: string): void {
-        let checklist: ChecklistType = this.getList(itemId);
-        ChecklistService.updateList(
-            itemId,
-            [todo, ...checklist]
-        );
-    }
-
-    updateListItem(itemId: string, idx: number, value: string) {
-        let checklist: ChecklistType = this.getList(itemId);
-        ChecklistService.updateList(
-            itemId,
-            checklist.map((todo, index) => (
-                index === idx ? value: todo
-            ))
-        );
-    }
-
-    deleteListItem(itemId: string, idx: number) {
-        let checklist = this.getList(itemId);
-        checklist.splice(idx, 1);
-        ChecklistService.updateList(
-            itemId,
-            checklist
-        );
-    }
+  deleteListItem(itemId: string, checklistItem: ChecklistItemType) {
+    store.db.dataset('ChecklistItems')
+      .delete()
+      .where(field => field('id').isEqualTo(checklistItem.id))
+      .subscribe((records) => {
+        const behaviors = store.getBehaviors(itemId);
+        const idx = behaviors.checklist.ChecklistItems.indexOf(checklistItem);
+        behaviors.checklist.ChecklistItems.splice(idx, 1);
+        store.setBehaviors(itemId, behaviors);
+      })
+  }
 }
 
 export const ChecklistService = new ChecklistServiceController();

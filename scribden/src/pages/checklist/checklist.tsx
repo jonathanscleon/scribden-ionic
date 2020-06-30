@@ -18,7 +18,7 @@ export class ChecklistPage {
             <ion-content class="ion-padding">
                 {item && (
                 <check-list
-                    item={item}
+                    itemId={item.id}
                 ></check-list>)}
             </ion-content>
         ];
