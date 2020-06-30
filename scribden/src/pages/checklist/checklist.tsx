@@ -1,4 +1,4 @@
-import { Component, Prop, h, State } from '@stencil/core';
+import { Component, Prop, h } from '@stencil/core';
 import { ItemService } from '../../services/item';
 
 @Component({
@@ -6,14 +6,9 @@ import { ItemService } from '../../services/item';
 })
 export class ChecklistPage {
     @Prop() itemId: string;
-    @State() id: number;
-
-    componentDidLoad() {
-        this.id = parseInt(this.itemId);
-    }
 
     render() {
-        const item = ItemService.getItem(this.id);
+        const item = ItemService.getItem(this.itemId);
         return [
             <ion-header>
                 <ion-toolbar color="primary">

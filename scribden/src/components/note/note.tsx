@@ -1,23 +1,23 @@
 import { Component, Prop, h } from '@stencil/core';
-import { ItemType } from '../../interfaces/item';
 import { NoteService } from '../../services/note';
 
 @Component({
     tag: 'note-editor'
 })
 export class Note {
-    @Prop() item: ItemType;
+    @Prop() itemId: string;
+
+    componentDidLoad() {
+        NoteService.fetchNote(this.itemId);
+    }
 
     updateNote(evt) {
         const value = evt.target.value;
-
-        console.log('updating note...');
-        console.log(value);
-        NoteService.updateNote(this.item.id, value);
+        NoteService.updateNote(this.itemId, value);
     }
 
     render() {
-        const note = NoteService.getNote(this.item.id);
+        const note = NoteService.getNote(this.itemId);
 
         return (
             <ion-item>
@@ -27,7 +27,7 @@ export class Note {
                     autofocus
                     debounce={300}
                     onIonChange={(evt) => this.updateNote(evt)}
-                    value={note}
+                    value={note && note.text}
                 ></ion-textarea>
             </ion-item>
         );

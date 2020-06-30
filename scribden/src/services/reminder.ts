@@ -3,7 +3,7 @@ import { ItemType } from '../interfaces/item';
 import { ReminderType } from '../interfaces/reminder';
 
 class ReminderServiceController {
-    private getItem(itemId: number): ItemType {
+    private getItem(itemId: string): ItemType {
         return ItemService.getItem(itemId);
     }
 
@@ -13,20 +13,20 @@ class ReminderServiceController {
         ItemService.updateItem(item);
     }
 
-    getReminder(itemId: number): ReminderType {
+    getReminder(itemId: string): ReminderType {
         let item: ItemType = this.getItem(itemId);
 
         return item && item.behaviors.reminder;
     }
 
-    updateReminder(itemId: number, reminder: ReminderType): void {
+    updateReminder(itemId: string, reminder: ReminderType): void {
         let item: ItemType = this.getItem(itemId);
         item.behaviors.reminder = reminder;
 
         ItemService.updateItem(item);
     }
 
-    deleteReminder(itemId: number): void {
+    deleteReminder(itemId: string): void {
         let item: ItemType = this.getItem(itemId);
         delete item.behaviors.reminder;
 

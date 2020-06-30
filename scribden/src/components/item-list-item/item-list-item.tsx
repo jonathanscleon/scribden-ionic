@@ -31,7 +31,7 @@ export class ItemListItem {
                 <ion-icon name="add-outline"></ion-icon>
             </ion-button>
         </ion-item>;
-        
+        /*
         const summary = [];
         const checklist = ChecklistService.getList(this.item.id);
         const note = NoteService.getNote(this.item.id);
@@ -47,11 +47,11 @@ export class ItemListItem {
                 </ion-item>
             );
         }
-        if (typeof note === 'string') {
+        if (note) {
             summary.push(
                 <ion-item>
                     <ion-router-link href={`/note/${this.item.id}`}>
-                        {note.substring(0, Math.min(200, note.length))}...
+                        {note.text.substring(0, Math.min(200, note.text.length))}...
                     </ion-router-link>
                 </ion-item>
             )
@@ -86,5 +86,7 @@ export class ItemListItem {
         } else {
             return listItem;
         }
+        */
+       return listItem;
     }
 }

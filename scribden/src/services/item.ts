@@ -5,8 +5,8 @@ class ItemServiceController {
   getAll(): ItemType[] {
     return store.get('items');
   }
-  
-  getItem(id: number): ItemType {
+
+  getItem(id: string): ItemType {
     return store.get('items').find(item => item.id === id);
   }
 
@@ -14,22 +14,22 @@ class ItemServiceController {
     store.db.dataset('Items')
       .select()
       .subscribe((records) => {
-          store.set('items', records);
-        },
+        store.set('items', records);
+      },
         (error) => console.error(error)
       );
   }
 
-  fetchItem(itemId: number): void {
+  fetchItem(itemId: string): void {
     store.db.dataset('Items')
       .select()
       .where(field => field('id').isEqualTo(itemId))
       .subscribe((records) => {
-          const items = store.get('items');
-          store.set('items', items.map(item =>
-            item.id === itemId ? records[0] : item
-          ));
-        },
+        const items = store.get('items');
+        store.set('items', items.map(item =>
+          item.id === itemId ? records[0] : item
+        ));
+      },
         (error) => console.error(error)
       );
   }
@@ -38,9 +38,9 @@ class ItemServiceController {
     store.db.dataset('Items')
       .insert({ name })
       .subscribe((records) => {
-          const items = store.get('items');
-          store.set('items', [...items, ...records]);
-        }, 
+        const items = store.get('items');
+        store.set('items', [...items, ...records]);
+      },
         (error) => console.error(error)
       );
   }
@@ -50,23 +50,23 @@ class ItemServiceController {
       .update(item)
       .where(field => field('id').isEqualTo(item.id))
       .subscribe((records) => {
-          const items = store.get('items');
-          store.set('items', items.map(i =>
-            i.id === item.id ? records[0] : i
-          ));
-        },
+        const items = store.get('items');
+        store.set('items', items.map(i =>
+          i.id === item.id ? records[0] : i
+        ));
+      },
         (error) => console.error(error)
       );
   }
 
-  deleteItem(itemId: number): void {
+  deleteItem(itemId: string): void {
     store.db.dataset('Items')
       .delete()
       .where(field => field('id').isEqualTo(itemId))
       .subscribe(() => {
-          const items = store.get('items');
-          store.set('items', items.filter(item => item.id !== itemId));
-        },
+        const items = store.get('items');
+        store.set('items', items.filter(item => item.id !== itemId));
+      },
         (error) => console.error(error)
       );
   }

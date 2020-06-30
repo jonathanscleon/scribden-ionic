@@ -28,7 +28,7 @@ export namespace Components {
     interface LoginPage {
     }
     interface NoteEditor {
-        "item": ItemType;
+        "itemId": string;
     }
     interface NotePage {
         "itemId": string;
@@ -190,7 +190,7 @@ declare namespace LocalJSX {
     interface LoginPage {
     }
     interface NoteEditor {
-        "item"?: ItemType;
+        "itemId"?: string;
     }
     interface NotePage {
         "itemId"?: string;

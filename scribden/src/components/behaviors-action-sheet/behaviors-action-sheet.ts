@@ -28,7 +28,7 @@ export async function presentBehaviorActionSheet(item: ItemType) {
       text: 'Note',
       icon: 'document-text',
       handler: () => {
-        NoteService.createNote(item);
+        NoteService.createNote(item.id);
         navigate('note');
       }
     },
@@ -74,7 +74,7 @@ export async function presentBehaviorActionSheet(item: ItemType) {
       role: 'destructive',
       icon: 'trash',
       handler: () => {
-        ItemService.deleteItem(item);
+        ItemService.deleteItem(item.id);
       }
     },
     'cancel': {

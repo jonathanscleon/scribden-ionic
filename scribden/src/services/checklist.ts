@@ -3,7 +3,7 @@ import { ItemType } from '../interfaces/item';
 import { ChecklistType } from '../interfaces/checklist';
 
 class ChecklistServiceController {
-    private getItem(itemId: number): ItemType {
+    private getItem(itemId: string): ItemType {
         return ItemService.getItem(itemId);
     }
 
@@ -13,27 +13,27 @@ class ChecklistServiceController {
         ItemService.updateItem(item);
     }
 
-    getList(itemId: number): ChecklistType {
+    getList(itemId: string): ChecklistType {
         let item: ItemType = this.getItem(itemId);
 
         return item && item.behaviors.checklist;
     }
 
-    updateList(itemId: number, checklist: ChecklistType): void {
+    updateList(itemId: string, checklist: ChecklistType): void {
         let item: ItemType = this.getItem(itemId);
         item.behaviors.checklist = checklist;
 
         ItemService.updateItem(item);
     }
 
-    deleteList(itemId: number): void {
+    deleteList(itemId: string): void {
         let item: ItemType = this.getItem(itemId);
         delete item.behaviors.checklist;
 
         ItemService.updateItem(item);
     }
 
-    addListItem(itemId: number, todo: string): void {
+    addListItem(itemId: string, todo: string): void {
         let checklist: ChecklistType = this.getList(itemId);
         ChecklistService.updateList(
             itemId,
@@ -41,7 +41,7 @@ class ChecklistServiceController {
         );
     }
 
-    updateListItem(itemId: number, idx: number, value: string) {
+    updateListItem(itemId: string, idx: number, value: string) {
         let checklist: ChecklistType = this.getList(itemId);
         ChecklistService.updateList(
             itemId,
@@ -51,7 +51,7 @@ class ChecklistServiceController {
         );
     }
 
-    deleteListItem(itemId: number, idx: number) {
+    deleteListItem(itemId: string, idx: number) {
         let checklist = this.getList(itemId);
         checklist.splice(idx, 1);
         ChecklistService.updateList(

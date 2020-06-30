@@ -1,36 +1,62 @@
-import { ItemService } from '../services/item';
-import { ItemType } from '../interfaces/item';
+import { NoteType } from '../interfaces/note';
+import { store } from './store';
 
 class NoteServiceController {
-    private getItem(itemId: number): ItemType {
-        return ItemService.getItem(itemId);
-    }
+  fetchNote(itemId: string): void {
+    store.db.dataset('Notes')
+      .select()
+      .where(field => field('itemId').isEqualTo(itemId))
+      .subscribe((records) => {
+        const behaviors = store.getBehaviors(itemId);
+        behaviors.note = records[0];
+        store.setBehaviors(itemId, behaviors);
+      },
+        (error) => console.error(error)
+      );
+  }
 
-    createNote(item: ItemType): void {
-        item.behaviors.note = '';
+  createNote(itemId: string): void {
+    store.db.dataset('Notes')
+      .insert({ itemId })
+      .subscribe((records) => {
+        const behaviors = store.getBehaviors(itemId);
+        behaviors.note = records[0];
+        store.setBehaviors(itemId, behaviors);
+      },
+        (error) => console.error(error)
+      );
+  }
 
-        ItemService.updateItem(item);
-    }
+  getNote(itemId: string): NoteType {
+    const behaviors = store.getBehaviors(itemId);
+    return behaviors.note;
+  }
 
-    getNote(itemId: number): string {
-        let item: ItemType = this.getItem(itemId);
+  updateNote(itemId: string, text: string): void {
+    store.db.dataset('Notes')
+      .update({ text })
+      .where(field => field('itemId').isEqualTo(itemId))
+      .subscribe((records) => {
+        const behaviors = store.getBehaviors(itemId);
+        behaviors.note = records[0];
+        store.setBehaviors(itemId, behaviors);
+      },
+        (error) => console.error(error)
+      );
+  }
 
-        return item && item.behaviors.note;
-    }
-
-    updateNote(itemId: number, text: string): void {
-        let item: ItemType = this.getItem(itemId);
-        item.behaviors.note = text;
-
-        ItemService.updateItem(item);
-    }
-
-    deleteNote(itemId: number): void {
-        let item: ItemType = this.getItem(itemId);
-        delete item.behaviors.note;
-
-        ItemService.updateItem(item);
-    }
+  deleteNote(itemId: string): void {
+    store.db.dataset('Notes')
+      .delete()
+      .where(field => field('itemId').isEqualTo(itemId))
+      .subscribe(() => {
+        const behaviors = store.getBehaviors(itemId);
+        behaviors.note = null;
+        store.setBehaviors(itemId, behaviors);
+      },
+        (error) => console.error(error)
+      );
+  }
 }
 
 export const NoteService = new NoteServiceController();

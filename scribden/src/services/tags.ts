@@ -2,7 +2,7 @@ import { ItemService } from '../services/item';
 import { ItemType } from '../interfaces/item';
 
 class TagServiceController {
-    private getItem(itemId: number): ItemType {
+    private getItem(itemId: string): ItemType {
         return ItemService.getItem(itemId);
     }
 
@@ -12,27 +12,27 @@ class TagServiceController {
         ItemService.updateItem(item);
     }
 
-    getTags(itemId: number): Array<string> {
+    getTags(itemId: string): Array<string> {
         let item: ItemType = this.getItem(itemId);
 
         return item && item.behaviors.tags;
     }
 
-    updateTags(itemId: number, tags: Array<string>): void {
+    updateTags(itemId: string, tags: Array<string>): void {
         let item: ItemType = this.getItem(itemId);
         item.behaviors.tags = tags;
 
         ItemService.updateItem(item);
     }
 
-    deleteTags(itemId: number): void {
+    deleteTags(itemId: string): void {
         let item: ItemType = this.getItem(itemId);
         delete item.behaviors.tags;
 
         ItemService.updateItem(item);
     }
 
-    addTag(itemId: number, tag: string): boolean {
+    addTag(itemId: string, tag: string): boolean {
         let item: ItemType = this.getItem(itemId);
         
         if (!this.tagAlreadyExists(item, tag)) {
@@ -47,7 +47,7 @@ class TagServiceController {
         }
     }
 
-    updateTag(itemId: number, idx: number, tag: string): boolean {
+    updateTag(itemId: string, idx: number, tag: string): boolean {
         let item: ItemType = this.getItem(itemId);
         // do not allow duplicate tags
         if (!this.tagAlreadyExists(item, tag)) {
@@ -59,7 +59,7 @@ class TagServiceController {
         }
     }
 
-    deleteTag(itemId: number, tag: string): void {
+    deleteTag(itemId: string, tag: string): void {
         let item: ItemType = this.getItem(itemId);
         const tagToRemoveIdx = item.behaviors.tags.indexOf(tag);
 
