@@ -3,23 +3,14 @@ import { store } from './store';
 
 class ChecklistServiceController {
   fetchChecklist(itemId: string): void {
-    console.log('FETCH CHECKLIST');
     store.db.dataset('Checklists')
       .select()
       .where(field => field('itemId').isEqualTo(itemId))
       .related('ChecklistItems', checklistItems => checklistItems.fields('checklistId', 'name'))
       .subscribe((records) => {
-        console.log(records);
         const behaviors = store.getBehaviors(itemId);
         behaviors.checklist = records[0];
         store.setBehaviors(itemId, behaviors);
-
-        store.db.dataset('ChecklistItems')
-          .select()
-          .where(field => field('checklistId').isEqualTo(behaviors.checklist.id))
-          .subscribe((records) => {
-            console.log(records);
-          })
       },
         (error) => console.error(error)
       );
@@ -43,9 +34,8 @@ class ChecklistServiceController {
   }
 
   deleteList(itemId: string): void {
-    store.db.dataset('ChecklistItems')
+    store.db.dataset('Checklists')
       .delete()
-      .related('Checklists')
       .where(field => field('itemId').isEqualTo(itemId))
       .subscribe(() => {
         const behaviors = store.getBehaviors(itemId);
@@ -55,15 +45,23 @@ class ChecklistServiceController {
   }
 
   addListItem(itemId: string, checklistId: string, name: string): void {
+    // add a checklist item
     store.db.dataset('ChecklistItems')
       .insert({ checklistId, name })
       .subscribe((records) => {
+        // update the state
         const behaviors = store.getBehaviors(itemId);
         behaviors.checklist.ChecklistItems = [
           ...behaviors.checklist.ChecklistItems,
           records[0]
         ];
         store.setBehaviors(itemId, behaviors);
+
+        // update the relation between the checklist and its items
+        store.db.dataset('Checklists')
+          .attach('ChecklistItems', records)
+          .where(field => field('id').isEqualTo(checklistId))
+          .subscribe((records) => console.log(records));
       })
   }
 

@@ -5,6 +5,7 @@
 - Add local notifications for reminders
 - Add UI for deleting behaviors
 - Add QuillJS to enable rich text formatting for notes
+- Retain user defined sort order for check list items
 
 Local Data integration
 - Install cordova plugin for Sqlite: https://github.com/xpbrew/cordova-sqlite-storage#readme

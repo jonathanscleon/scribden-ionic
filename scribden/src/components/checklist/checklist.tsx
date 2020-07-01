@@ -8,7 +8,7 @@ import { ChecklistItemType } from '../../interfaces/checklist';
 })
 export class Checklist {
     @Prop() itemId: string;
-    @State() deleteItemIdQueue: number = -1;
+    @State() lastCheckedItem;
 
     componentDidLoad() {
         ChecklistService.fetchChecklist(this.itemId);
@@ -23,17 +23,22 @@ export class Checklist {
         // ion-checkbox does not emit transition/animation end events.
         // looked at the source code and the transition time is set to 180ms.
         setTimeout(() => {
+            ChecklistService.deleteListItem(this.itemId, todo);
             // ion-checkbox unfortunately manages its own state,
             // so it updates when clicking and ignores the property.
             // there's also a bug where removing a checkbox from a list
             // for some reason has the checkbox at that index inherit the
             // removed checkbox state.
-            //evt.target.checked = false;
-            ChecklistService.deleteListItem(this.itemId, todo);
+            this.lastCheckedItem = evt.target;
         }, 500);
     }
 
     render() {
+        // reset checked state due to ionic issue
+        if (this.lastCheckedItem) {
+            this.lastCheckedItem.checked = false;
+        }
+
         const list = ChecklistService.getList(this.itemId);
 
         return [
@@ -47,6 +52,7 @@ export class Checklist {
                         <ion-checkbox
                             onClick={(evt) => this.completeListItem(evt, todo)}
                             slot="start"
+                            checked={false}
                         ></ion-checkbox>
                         <ion-input
                             name="value"
