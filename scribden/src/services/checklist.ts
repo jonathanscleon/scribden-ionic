@@ -8,7 +8,6 @@ class ChecklistServiceController {
       .where(field => field('itemId').isEqualTo(itemId))
       .related('ChecklistItems', checklistItems => checklistItems.fields('checklistId', 'name'))
       .subscribe((records) => {
-        debugger;
         const item = store.getItem(itemId);
         item.Checklists = records[0];
         store.setItem(item);

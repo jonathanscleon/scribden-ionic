@@ -29,7 +29,7 @@ export class Checklist {
       // for some reason has the checkbox at that index inherit the
       // removed checkbox state.
       this.lastCheckedItem = evt.target;
-    }, 500);
+    }, 300);
   }
 
   render() {
