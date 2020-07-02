@@ -13,9 +13,12 @@ class ItemServiceController {
   fetchAll(): void {
     store.db.dataset('Items')
       .select()
-      .related('Checklists')
+      .related('Checklists', checklists => checklists
+        .related('ChecklistItems'))
       .related('Notes')
       .related('Reminders')
+      .related('TagLists', tagLists => tagLists
+        .related('Tags'))
       .subscribe((records) => {
         console.log(records);
         store.set('items', records);
@@ -31,6 +34,8 @@ class ItemServiceController {
         .related('ChecklistItems'))
       .related('Notes')
       .related('Reminders')
+      .related('TagLists', tagLists => tagLists
+        .related('Tags'))
       .where(field => field('id').isEqualTo(itemId))
       .subscribe((records) => {
         const items = store.get('items');

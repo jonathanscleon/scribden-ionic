@@ -28,7 +28,6 @@ export const store = {
     state.items.filter(item => item.id === itemId)[0],
   // update item  
   setItem: (newItem: ItemType) => {
-    console.log('SET ITEM');
     if (state.items.length) {
       state.items = state.items.map((item) => item.id === newItem.id ? newItem : item)
     } else {

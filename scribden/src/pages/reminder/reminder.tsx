@@ -7,8 +7,13 @@ import { ItemService } from '../../services/item';
 export class ReminderPage {
   @Prop() itemId: string;
 
+  componentDidLoad() {
+    ItemService.fetchItem(this.itemId);
+  }
+
   render() {
     const item = ItemService.getItem(this.itemId);
+    
     return [
       <ion-header>
         <ion-toolbar color="primary">

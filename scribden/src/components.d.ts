@@ -47,7 +47,7 @@ export namespace Components {
         "itemId": string;
     }
     interface TagForm {
-        "item": ItemType;
+        "itemId": string;
     }
     interface TagPage {
         "itemId": string;
@@ -210,7 +210,7 @@ declare namespace LocalJSX {
         "itemId"?: string;
     }
     interface TagForm {
-        "item"?: ItemType;
+        "itemId"?: string;
     }
     interface TagPage {
         "itemId"?: string;

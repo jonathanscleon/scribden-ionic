@@ -1,14 +1,15 @@
 # scribden-ionic
 
 ## TODO
-- Fix race condition where fetchItem completes after fetchChecklist, wiping out the checklist information?
-- Fix bug where hitting back from item detail goes to item list, and the item details are missing
 - Install date-fns and format reminder preview
 - Add local notifications for reminders
 - Add UI for deleting behaviors
 - Add QuillJS to enable rich text formatting for notes
 - Retain user defined sort order for check list items
 - Manage calendar events using reminders
+
+## Warnings
+- Race condition where fetchItem completes after fetchChecklist, wiping out the checklist information
 
 Local Data integration
 - Install cordova plugin for Sqlite: https://github.com/xpbrew/cordova-sqlite-storage#readme

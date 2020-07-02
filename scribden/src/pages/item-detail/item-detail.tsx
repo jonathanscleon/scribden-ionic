@@ -37,7 +37,7 @@ export class ItemDetailPage {
         )}
         {item && (
           <tag-form
-            item={item}
+            itemId={item.id}
           ></tag-form>
         )}
       </ion-content>

@@ -1,6 +1,7 @@
 import { ChecklistType } from './checklist';
 import { NoteType } from './note';
 import { ReminderType } from './reminder';
+import { TagListType } from './tag';
 
 export interface ItemType {
   id?: string,
@@ -12,5 +13,6 @@ export interface ItemType {
   updated_at?: string,
   Checklists?: ChecklistType,
   Notes?: NoteType,
-  Reminders?: ReminderType
+  Reminders?: ReminderType,
+  TagLists?: TagListType
 }

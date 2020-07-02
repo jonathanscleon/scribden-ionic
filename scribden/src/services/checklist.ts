@@ -86,7 +86,7 @@ class ChecklistServiceController {
     store.db.dataset('ChecklistItems')
       .delete()
       .where(field => field('id').isEqualTo(checklistItem.id))
-      .subscribe((records) => {
+      .subscribe(() => {
         const item = store.getItem(itemId);
         const idx = item.Checklists.ChecklistItems.indexOf(checklistItem);
         item.Checklists.ChecklistItems.splice(idx, 1);

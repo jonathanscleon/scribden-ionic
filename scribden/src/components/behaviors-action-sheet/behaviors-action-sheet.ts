@@ -3,7 +3,7 @@ import { ItemService } from '../../services/item';
 import { ChecklistService } from '../../services/checklist';
 import { NoteService } from '../../services/note';
 import { ReminderService } from '../../services/reminder';
-import { TagService } from '../../services/tags';
+import { TagService } from '../../services/tag';
 import { ItemType } from '../../interfaces/item';
 
 export async function presentBehaviorActionSheet(item: ItemType) {
@@ -40,14 +40,16 @@ export async function presentBehaviorActionSheet(item: ItemType) {
         navigate('reminder');
       }
     },
-    'Tags': {
+    'TagLists': {
       text: 'Tags',
       icon: 'pricetag',
       handler: () => {
-        TagService.createTags(item);
+        TagService.createList(item.id);
         navigate('tags');
       }
     },
+    // @TODO
+    /*
     'share': {
       text: 'Share',
       icon: 'share',
@@ -68,7 +70,7 @@ export async function presentBehaviorActionSheet(item: ItemType) {
       handler: () => {
         
       }
-    },
+    },*/
     'delete': {
       text: 'Delete',
       role: 'destructive',

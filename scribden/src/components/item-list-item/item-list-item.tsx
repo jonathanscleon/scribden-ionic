@@ -1,4 +1,6 @@
 import { Component, Prop, State, h } from '@stencil/core';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
 import { presentBehaviorActionSheet } from '../behaviors-action-sheet/behaviors-action-sheet';
 import { ItemType } from '../../interfaces/item';
 
@@ -29,20 +31,12 @@ export class ItemListItem {
     </ion-item>;
 
     const summary = [];
-    console.log('RENDERING LIST ITEM');
-    console.log(this.item);
-    /*
-    const checklist = ChecklistService.getList(this.item.id);
-    const note = NoteService.getNote(this.item.id);
-    const reminder = ReminderService.getReminder(this.item.id);
-    const tags = TagService.getTags(this.item.id);
-    */
 
     if (this.item.Checklists) {
       summary.push(
         <ion-item>
           <ion-router-link href={`/checklist/${this.item.id}`}>
-            Tasks
+            {(this.item.Checklists.ChecklistItems && this.item.Checklists.ChecklistItems.length) || 0} Task(s)
           </ion-router-link>
         </ion-item>
       );
@@ -57,31 +51,37 @@ export class ItemListItem {
       )
     }
     if (this.item.Reminders) {
+      let timeStr = '';
+      if (this.item.Reminders.datetime) {
+        timeStr = `on ${format(parseISO(this.item.Reminders.datetime), 'PPPPpppp')}`;
+      }
+
       summary.push(
         <ion-item>
           <ion-router-link href={`/reminder/${this.item.id}`}>
-            Reminder
+            {this.item.Reminders.name} {timeStr}
           </ion-router-link>
         </ion-item>
       )
     }
-    /*
-    if (tags && tags.length) {
+    if (this.item.TagLists) {
         summary.push(
             <ion-item>
-                <ion-router-link href={`/tag/${this.item.id}`}>
+                <ion-router-link href={`/tags/${this.item.id}`}>
                     <ion-item-group>
-                        {tags.map((tag) => (
+                        {
+                        (this.item.TagLists.Tags && this.item.TagLists.Tags.length > 0) ? 
+                        this.item.TagLists.Tags.map((tag) => (
                             <ion-chip>
-                                <ion-label>{tag}</ion-label>
+                                <ion-label>{tag.name}</ion-label>
                             </ion-chip>
-                        ))}
+                        )) : 'No tags yet'
+                        }
                     </ion-item-group>
                 </ion-router-link>
             </ion-item>
         )
     }
-    */
 
     if (this.isVisible) {
       return [listItem, ...summary];

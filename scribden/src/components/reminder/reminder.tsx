@@ -27,6 +27,7 @@ export class Reminder {
     let time = parseISO(this.form.time);
     date.setHours(time.getHours());
     date.setMinutes(time.getMinutes());
+    date.setSeconds(0);
     reminder.datetime = formatISO(date);
 
     ReminderService.updateReminder(this.itemId, reminder);
