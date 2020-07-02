@@ -38,14 +38,14 @@ class NoteServiceController {
   }
 
   updateNote(itemId: string, text: string): void {
+    const item = store.getItem(itemId);
+    item.Notes.text = text;
+    store.setItem(item);
+
     store.db.dataset('Notes')
       .update({ text })
       .where(field => field('itemId').isEqualTo(itemId))
-      .subscribe((records) => {
-        const item = store.getItem(itemId);
-        item.Notes = records[0];
-        store.setItem(item);
-      },
+      .subscribe(() => {},
         (error) => console.error(error)
       );
   }
