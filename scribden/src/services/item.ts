@@ -27,6 +27,10 @@ class ItemServiceController {
   fetchItem(itemId: string): void {
     store.db.dataset('Items')
       .select()
+      .related('Checklists', checklists => checklists
+        .related('ChecklistItems'))
+      .related('Notes')
+      .related('Reminders')
       .where(field => field('id').isEqualTo(itemId))
       .subscribe((records) => {
         const items = store.get('items');

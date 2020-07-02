@@ -6,7 +6,7 @@ class ChecklistServiceController {
     store.db.dataset('Checklists')
       .select()
       .where(field => field('itemId').isEqualTo(itemId))
-      .related('ChecklistItems', checklistItems => checklistItems.fields('checklistId', 'name'))
+      .related('ChecklistItems')
       .subscribe((records) => {
         const item = store.getItem(itemId);
         item.Checklists = records[0];
@@ -28,7 +28,7 @@ class ChecklistServiceController {
         store.db.dataset('Items')
           .attach('Checklists', records)
           .where(field => field('id').isEqualTo(itemId))
-          .subscribe((records) => console.log(records));
+          .subscribe(() => {});
       },
         (error) => console.error(error)
       );
@@ -66,7 +66,7 @@ class ChecklistServiceController {
         store.db.dataset('Checklists')
           .attach('ChecklistItems', records)
           .where(field => field('id').isEqualTo(checklistId))
-          .subscribe((records) => console.log(records));
+          .subscribe(() => {});
       })
   }
 

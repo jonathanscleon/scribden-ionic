@@ -29,6 +29,8 @@ export class ItemListItem {
     </ion-item>;
 
     const summary = [];
+    console.log('RENDERING LIST ITEM');
+    console.log(this.item);
     /*
     const checklist = ChecklistService.getList(this.item.id);
     const note = NoteService.getNote(this.item.id);

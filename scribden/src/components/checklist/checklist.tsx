@@ -9,10 +9,6 @@ export class Checklist {
   @Prop() itemId: string;
   @State() lastCheckedItem;
 
-  componentDidLoad() {
-    ChecklistService.fetchChecklist(this.itemId);
-  }
-
   updateListItem(evt, todo: ChecklistItemType) {
     todo.name = evt.target.value;
     ChecklistService.updateListItem(this.itemId, todo);
@@ -39,12 +35,13 @@ export class Checklist {
     }
 
     const list = ChecklistService.getList(this.itemId);
-
+    console.log(`RENDERING CHECKLIST: ${list && list.ChecklistItems && list.ChecklistItems.length}`);
+    console.log(list);
     return [
       <quick-add
         label='New Task'
         add={(value: string) => ChecklistService.addListItem(this.itemId, list.id, value)}
-        disabled={!!list}
+        disabled={!!!list}
       ></quick-add>,
       <ion-list>
         {list && list.ChecklistItems && list.ChecklistItems.map((todo) => (

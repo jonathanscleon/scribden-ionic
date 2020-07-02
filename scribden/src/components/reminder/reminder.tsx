@@ -13,11 +13,7 @@ export class Reminder {
     date: '',
     time: ''
   };
-
-  componentDidLoad() {
-    ReminderService.fetchReminder(this.itemId);
-  }
-
+  
   updateValue(evt, name: string) {
     this.form[name] = evt.target.value;
   }

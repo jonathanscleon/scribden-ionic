@@ -7,10 +7,6 @@ import { NoteService } from '../../services/note';
 export class Note {
   @Prop() itemId: string;
 
-  componentDidLoad() {
-    NoteService.fetchNote(this.itemId);
-  }
-
   updateNote(evt) {
     const value = evt.target.value;
     NoteService.updateNote(this.itemId, value);

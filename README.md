@@ -1,6 +1,8 @@
 # scribden-ionic
 
 ## TODO
+- Fix race condition where fetchItem completes after fetchChecklist, wiping out the checklist information?
+- Fix bug where hitting back from item detail goes to item list, and the item details are missing
 - Install date-fns and format reminder preview
 - Add local notifications for reminders
 - Add UI for deleting behaviors
