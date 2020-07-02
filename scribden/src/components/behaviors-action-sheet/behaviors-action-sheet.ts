@@ -16,7 +16,7 @@ export async function presentBehaviorActionSheet(item: ItemType) {
   const availableBehaviors = [];
 
   const behaviors = {
-    'checklist': {
+    'Checklists': {
       text: 'Checklist',
       icon: 'checkbox',
       handler: () => {
@@ -24,7 +24,7 @@ export async function presentBehaviorActionSheet(item: ItemType) {
         navigate('checklist');
       }
     },
-    'note': {
+    'Notes': {
       text: 'Note',
       icon: 'document-text',
       handler: () => {
@@ -32,15 +32,15 @@ export async function presentBehaviorActionSheet(item: ItemType) {
         navigate('note');
       }
     },
-    'reminder': {
+    'Reminders': {
       text: 'Reminder',
       icon: 'alarm',
       handler: () => {
-        ReminderService.createReminder(item);
+        ReminderService.createReminder(item.id);
         navigate('reminder');
       }
     },
-    'tags': {
+    'Tags': {
       text: 'Tags',
       icon: 'pricetag',
       handler: () => {
@@ -88,8 +88,10 @@ export async function presentBehaviorActionSheet(item: ItemType) {
   };
 
   // if the behavior has been added, do not allow re-adding it
-  for (const behavior in item.behaviors) {
-    delete behaviors[behavior];
+  for (const prop in item) {
+    if (item[prop] && behaviors[prop]) {
+      delete behaviors[prop];
+    }
   }
 
   // show all behavior options that haven't been added yet

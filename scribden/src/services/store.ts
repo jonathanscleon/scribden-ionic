@@ -1,15 +1,17 @@
 import { createStore } from '@stencil/store';
-import { get, set } from './storage';
+// import { get, set } from './storage';
 import { db } from './syncStore';
+import { ItemType } from '../interfaces/item';
 
 // @TODO: optimize
 const shouldUpdate = () => true;
 
-const { state, on } = createStore({
-    items: [],
-    behaviors: {} // hash by item id
+// const { state, on } = createStore({
+const { state } = createStore({
+  items: [],
+  behaviors: {} // hash by item id
 }, shouldUpdate);
-
+/*
 (async () => {
     state.items = (await get('items')) || [];
 })();
@@ -18,22 +20,19 @@ const { state, on } = createStore({
 on('set', (key, newValue) => {
     set(key, newValue);
 });
-
+*/
 export const store = {
-    db,
-    get: (key: string) => state[key],
-    getBehaviors: (itemId: string) => {
-        if (!state.behaviors[itemId]) {
-            state.behaviors[itemId] = {};
-        }
-        
-        return state['behaviors'][itemId];
-    },
-    setBehaviors: (itemId: string, value: any) => {
-        state.behaviors = {
-            ...state.behaviors,
-            [itemId]: value
-        };
-    },
-    set: (key: string, value: any) => state[key] = value
+  db,
+  get: (key: string) => state[key],
+  getItem: (itemId: string): ItemType => state.items &&
+    state.items.filter(item => item.id === itemId)[0],
+  // update item  
+  setItem: (newItem: ItemType) => {
+    if (state.items.length) {
+      state.items = state.items.map((item) => item.id === newItem.id ? newItem : item)
+    } else {
+      state.items = [newItem];
+    }
+  },
+  set: (key: string, value: any) => state[key] = value
 };

@@ -35,12 +35,13 @@ export namespace Components {
     }
     interface QuickAdd {
         "add": Function;
+        "disabled": boolean;
         "label": string;
     }
     interface RegisterPage {
     }
     interface ReminderForm {
-        "item": ItemType;
+        "itemId": string;
     }
     interface ReminderPage {
         "itemId": string;
@@ -197,12 +198,13 @@ declare namespace LocalJSX {
     }
     interface QuickAdd {
         "add"?: Function;
+        "disabled"?: boolean;
         "label"?: string;
     }
     interface RegisterPage {
     }
     interface ReminderForm {
-        "item"?: ItemType;
+        "itemId"?: string;
     }
     interface ReminderPage {
         "itemId"?: string;

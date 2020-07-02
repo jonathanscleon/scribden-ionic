@@ -7,9 +7,9 @@ class NoteServiceController {
       .select()
       .where(field => field('itemId').isEqualTo(itemId))
       .subscribe((records) => {
-        const behaviors = store.getBehaviors(itemId);
-        behaviors.note = records[0];
-        store.setBehaviors(itemId, behaviors);
+        const item = store.getItem(itemId);
+        item.Notes = records[0];
+        store.setItem(item);
       },
         (error) => console.error(error)
       );
@@ -19,17 +19,22 @@ class NoteServiceController {
     store.db.dataset('Notes')
       .insert({ itemId })
       .subscribe((records) => {
-        const behaviors = store.getBehaviors(itemId);
-        behaviors.note = records[0];
-        store.setBehaviors(itemId, behaviors);
+        const item = store.getItem(itemId);
+        item.Notes = records[0];
+        store.setItem(item);
+
+        // update the relation between the item and its note
+        store.db.dataset('Items')
+          .attach('Notes', records)
+          .where(field => field('id').isEqualTo(itemId))
+          .subscribe((records) => console.log(records));
       },
         (error) => console.error(error)
       );
   }
 
   getNote(itemId: string): NoteType {
-    const behaviors = store.getBehaviors(itemId);
-    return behaviors.note;
+    return store.getItem(itemId).Notes;
   }
 
   updateNote(itemId: string, text: string): void {
@@ -37,9 +42,9 @@ class NoteServiceController {
       .update({ text })
       .where(field => field('itemId').isEqualTo(itemId))
       .subscribe((records) => {
-        const behaviors = store.getBehaviors(itemId);
-        behaviors.note = records[0];
-        store.setBehaviors(itemId, behaviors);
+        const item = store.getItem(itemId);
+        item.Notes = records[0];
+        store.setItem(item);
       },
         (error) => console.error(error)
       );
@@ -50,9 +55,9 @@ class NoteServiceController {
       .delete()
       .where(field => field('itemId').isEqualTo(itemId))
       .subscribe(() => {
-        const behaviors = store.getBehaviors(itemId);
-        behaviors.note = null;
-        store.setBehaviors(itemId, behaviors);
+        const item = store.getItem(itemId);
+        item.Notes = null;
+        store.setItem(item);
       },
         (error) => console.error(error)
       );

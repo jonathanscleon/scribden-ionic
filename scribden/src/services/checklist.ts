@@ -8,9 +8,10 @@ class ChecklistServiceController {
       .where(field => field('itemId').isEqualTo(itemId))
       .related('ChecklistItems', checklistItems => checklistItems.fields('checklistId', 'name'))
       .subscribe((records) => {
-        const behaviors = store.getBehaviors(itemId);
-        behaviors.checklist = records[0];
-        store.setBehaviors(itemId, behaviors);
+        debugger;
+        const item = store.getItem(itemId);
+        item.Checklists = records[0];
+        store.setItem(item);
       },
         (error) => console.error(error)
       );
@@ -19,18 +20,23 @@ class ChecklistServiceController {
   createList(itemId: string): void {
     store.db.dataset('Checklists')
       .insert({ itemId })
-      .subscribe(() => {
-        const behaviors = store.getBehaviors(itemId);
-        behaviors.checklist = [];
-        store.setBehaviors(itemId, behaviors);
+      .subscribe((records) => {
+        const item = store.getItem(itemId);
+        item.Checklists = records[0];
+        store.setItem(item);
+
+        // update the relation between the item and its checklist
+        store.db.dataset('Items')
+          .attach('Checklists', records)
+          .where(field => field('id').isEqualTo(itemId))
+          .subscribe((records) => console.log(records));
       },
         (error) => console.error(error)
       );
   }
 
   getList(itemId: string): ChecklistType {
-    const behaviors = store.getBehaviors(itemId);
-    return behaviors.checklist;
+    return store.getItem(itemId).Checklists;
   }
 
   deleteList(itemId: string): void {
@@ -38,9 +44,9 @@ class ChecklistServiceController {
       .delete()
       .where(field => field('itemId').isEqualTo(itemId))
       .subscribe(() => {
-        const behaviors = store.getBehaviors(itemId);
-        behaviors.checklist = null;
-        store.setBehaviors(itemId, behaviors);
+        const item = store.getItem(itemId);
+        item.Checklists = null;
+        store.setItem(item);
       })
   }
 
@@ -50,12 +56,12 @@ class ChecklistServiceController {
       .insert({ checklistId, name })
       .subscribe((records) => {
         // update the state
-        const behaviors = store.getBehaviors(itemId);
-        behaviors.checklist.ChecklistItems = [
-          ...behaviors.checklist.ChecklistItems,
+        const item = store.getItem(itemId);
+        item.Checklists.ChecklistItems = [
+          ...item.Checklists.ChecklistItems,
           records[0]
         ];
-        store.setBehaviors(itemId, behaviors);
+        store.setItem(item);
 
         // update the relation between the checklist and its items
         store.db.dataset('Checklists')
@@ -70,10 +76,10 @@ class ChecklistServiceController {
       .update(checklistItem)
       .where(field => field('id').isEqualTo(checklistItem.id))
       .subscribe(() => {
-        const behaviors = store.getBehaviors(itemId);
-        const idx = behaviors.checklist.ChecklistItems.indexOf(checklistItem);
-        behaviors.checklist.ChecklistItems[idx] = checklistItem;
-        store.setBehaviors(itemId, behaviors);
+        const item = store.getItem(itemId);
+        const idx = item.Checklists.ChecklistItems.indexOf(checklistItem);
+        item.Checklists.ChecklistItems[idx] = checklistItem;
+        store.setItem(item);
       })
   }
 
@@ -82,10 +88,10 @@ class ChecklistServiceController {
       .delete()
       .where(field => field('id').isEqualTo(checklistItem.id))
       .subscribe((records) => {
-        const behaviors = store.getBehaviors(itemId);
-        const idx = behaviors.checklist.ChecklistItems.indexOf(checklistItem);
-        behaviors.checklist.ChecklistItems.splice(idx, 1);
-        store.setBehaviors(itemId, behaviors);
+        const item = store.getItem(itemId);
+        const idx = item.Checklists.ChecklistItems.indexOf(checklistItem);
+        item.Checklists.ChecklistItems.splice(idx, 1);
+        store.setItem(item);
       })
   }
 }

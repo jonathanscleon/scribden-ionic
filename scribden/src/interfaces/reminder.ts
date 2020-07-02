@@ -1,5 +1,5 @@
 export interface ReminderType {
-    name: string,
-    date: string,
-    time: string
+  itemId: string,
+  name: string,
+  datetime: string
 };
