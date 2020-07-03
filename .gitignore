@@ -2,4 +2,5 @@
 scribden/src/global/app-dev.ts
 node_modules
 .vscode
+.DS_Store
 
