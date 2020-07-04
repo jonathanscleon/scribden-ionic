@@ -1,4 +1,4 @@
-import { ReminderType } from '../interfaces/reminder';
+import { ReminderType } from './reminder-interface';
 import { store } from '../root/store';
 
 class ReminderServiceController {

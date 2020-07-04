@@ -2,6 +2,7 @@ export interface ChecklistItemType {
   id: string,
   checklistId: string,
   name: string,
+  position?: string, // @TODO make required
   created_at: string,
   updated_at: string
 }

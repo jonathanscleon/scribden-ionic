@@ -1,7 +1,7 @@
 import { Component, Prop, h, State } from '@stencil/core';
 import parseISO from 'date-fns/parseISO';
 import formatISO from 'date-fns/formatISO';
-import { ReminderService } from '../../services/reminder';
+import { ReminderService } from '../reminder-service';
 
 @Component({
   tag: 'reminder-form'

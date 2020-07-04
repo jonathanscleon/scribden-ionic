@@ -1,4 +1,4 @@
-import { NoteType } from '../interfaces/note';
+import { NoteType } from './note-interface';
 import { store } from '../root/store';
 
 class NoteServiceController {

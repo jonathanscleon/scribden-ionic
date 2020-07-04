@@ -1,11 +1,27 @@
 # scribden-ionic
 
-## TODO
-- Install date-fns and format reminder preview
-- Add local notifications for reminders
-- Add UI for deleting behaviors
-- Add QuillJS to enable rich text formatting for notes
+## Bugs
+- Change update calls to only use updateable fields. Exclude id, created_at, updated_at fields
+
+## Tech Debt
+- Clean up use of Mudder; encapsulate in a service
+
+## MVP Test TODO
 - Retain user defined sort order for check list items
+- Auth
+- Share items
+- Add local notifications for reminders
+- Use basic key/value store for keeping track of current reminders, in order to sync with shared reminders. Remove this once full SQLite sync is available.
+
+## MVP Launch 
+- Search by tag
+- Add UI for deleting behaviors
+- Themes
+- Add QuillJS to enable rich text formatting for notes
+- Offline SQLite support
+- Account optional, followed by syncing on sign up
+
+## Next TODO
 - Manage calendar events using reminders
 
 ## Warnings
