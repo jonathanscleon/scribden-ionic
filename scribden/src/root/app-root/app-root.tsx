@@ -10,7 +10,8 @@ export class AppRoot {
     return (
       <ion-app>
         <ion-router useHash={false}>
-          <ion-route url="/" component="item-list-page" />
+          <ion-route url="/" component="home-page" />
+          <ion-route url="/items" component="item-list-page" />
           <ion-route url="/detail/:itemId" component="item-detail-page" />
           <ion-route url="/checklist/:itemId" component="checklist-page" />
           <ion-route url="/note/:itemId" component="note-page" />

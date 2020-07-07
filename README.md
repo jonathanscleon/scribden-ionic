@@ -7,13 +7,16 @@
 - Clean up use of Mudder; encapsulate in a service
 
 ## MVP Test TODO
-- Retain user defined sort order for check list items
 - Auth
 - Share items
-- Add local notifications for reminders
-- Use basic key/value store for keeping track of current reminders, in order to sync with shared reminders. Remove this once full SQLite sync is available.
+- Redirects for form submissions for auth pages
+- Reset password page that takes token provided by email
+- Investigate auth constraints
+- Lock down API for unregistered users
 
 ## MVP Launch 
+- Add local notifications for reminders
+- Use basic key/value store for keeping track of current reminders, in order to sync with shared reminders. Remove this once full SQLite sync is available.
 - Search by tag
 - Add UI for deleting behaviors
 - Themes

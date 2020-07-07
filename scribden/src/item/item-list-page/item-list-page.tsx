@@ -9,7 +9,6 @@ export class ItemListPage {
   @State() filter: string = '';
 
   componentDidLoad() {
-    // @TODO: check auth and redirect if not authenticated
     ItemService.fetchAll();
   }
 

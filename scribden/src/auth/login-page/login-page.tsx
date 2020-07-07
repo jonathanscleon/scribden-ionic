@@ -15,7 +15,13 @@ export class LoginPage {
   }
 
   handleSubmit() {
-    AuthService.login(this.form.email, this.form.password);
+    const navigate = (page: string) => {
+      document.querySelector('ion-router').componentOnReady().then(router => {
+        router.push(`/${page}`);
+      });
+    };
+
+    AuthService.login(this.form.email, this.form.password).then(() => navigate('items'));
   }
 
   render() {

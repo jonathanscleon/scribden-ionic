@@ -17,6 +17,8 @@ export namespace Components {
     }
     interface ForgotPasswordPage {
     }
+    interface HomePage {
+    }
     interface ItemDetailPage {
         "itemId": string;
     }
@@ -77,6 +79,12 @@ declare global {
     var HTMLForgotPasswordPageElement: {
         prototype: HTMLForgotPasswordPageElement;
         new (): HTMLForgotPasswordPageElement;
+    };
+    interface HTMLHomePageElement extends Components.HomePage, HTMLStencilElement {
+    }
+    var HTMLHomePageElement: {
+        prototype: HTMLHomePageElement;
+        new (): HTMLHomePageElement;
     };
     interface HTMLItemDetailPageElement extends Components.ItemDetailPage, HTMLStencilElement {
     }
@@ -155,6 +163,7 @@ declare global {
         "check-list": HTMLCheckListElement;
         "checklist-page": HTMLChecklistPageElement;
         "forgot-password-page": HTMLForgotPasswordPageElement;
+        "home-page": HTMLHomePageElement;
         "item-detail-page": HTMLItemDetailPageElement;
         "item-list-item": HTMLItemListItemElement;
         "item-list-page": HTMLItemListPageElement;
@@ -179,6 +188,8 @@ declare namespace LocalJSX {
         "itemId"?: string;
     }
     interface ForgotPasswordPage {
+    }
+    interface HomePage {
     }
     interface ItemDetailPage {
         "itemId"?: string;
@@ -220,6 +231,7 @@ declare namespace LocalJSX {
         "check-list": CheckList;
         "checklist-page": ChecklistPage;
         "forgot-password-page": ForgotPasswordPage;
+        "home-page": HomePage;
         "item-detail-page": ItemDetailPage;
         "item-list-item": ItemListItem;
         "item-list-page": ItemListPage;
@@ -242,6 +254,7 @@ declare module "@stencil/core" {
             "check-list": LocalJSX.CheckList & JSXBase.HTMLAttributes<HTMLCheckListElement>;
             "checklist-page": LocalJSX.ChecklistPage & JSXBase.HTMLAttributes<HTMLChecklistPageElement>;
             "forgot-password-page": LocalJSX.ForgotPasswordPage & JSXBase.HTMLAttributes<HTMLForgotPasswordPageElement>;
+            "home-page": LocalJSX.HomePage & JSXBase.HTMLAttributes<HTMLHomePageElement>;
             "item-detail-page": LocalJSX.ItemDetailPage & JSXBase.HTMLAttributes<HTMLItemDetailPageElement>;
             "item-list-item": LocalJSX.ItemListItem & JSXBase.HTMLAttributes<HTMLItemListItemElement>;
             "item-list-page": LocalJSX.ItemListPage & JSXBase.HTMLAttributes<HTMLItemListPageElement>;
