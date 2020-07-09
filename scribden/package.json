@@ -9,6 +9,8 @@
   ],
   "scripts": {
     "build": "stencil build",
+    "ios-build": "cap copy ios && cap open ios",
+    "android-build": "cap copy android && cap open android",
     "dev": "stencil build --dev --watch --serve",
     "prod": "http-server ./www -p 80",
     "test": "stencil test --spec --e2e",

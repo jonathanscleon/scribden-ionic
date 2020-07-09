@@ -1,6 +1,7 @@
 .env.development
-scribden/src/global/app-dev.ts
+scribden/src/root/global/app-dev.ts
 node_modules
 .vscode
 .DS_Store
+scribden/ios
 
