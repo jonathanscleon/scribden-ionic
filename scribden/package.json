@@ -28,6 +28,7 @@
     "@capacitor/ios": "^2.2.0"
   },
   "dependencies": {
+    "date-fns": "^2.14.0",
     "http-server": "^0.12.3",
     "mudder": "^1.0.9"
   }
