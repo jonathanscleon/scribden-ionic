@@ -1,6 +1,6 @@
 import { createStore } from '@stencil/store';
 // import { get, set } from './storage';
-import { db } from './syncStore';
+import { db, ums } from './syncStore';
 import { ItemType } from '../item/item-interface';
 
 // @TODO: optimize
@@ -23,6 +23,7 @@ on('set', (key, newValue) => {
 */
 export const store = {
   db,
+  ums,
   get: (key: string) => state[key],
   getItem: (itemId: string): ItemType => state.items &&
     state.items.filter(item => item.id === itemId)[0],

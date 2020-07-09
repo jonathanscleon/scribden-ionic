@@ -14,8 +14,16 @@ export class RegisterPage {
     this.form[label] = evt.target.value;
   }
 
-  handleSubmit() {
-    AuthService.register(this.form.email, this.form.password);
+  handleSubmit(evt) {
+    evt.preventDefault();
+
+    const navigate = (page: string) => {
+      document.querySelector('ion-router').componentOnReady().then(router => {
+        router.push(`/${page}`);
+      });
+    };
+
+    AuthService.register(this.form.email, this.form.password).then(() => navigate('items'));
   }
 
   render() {
@@ -27,7 +35,7 @@ export class RegisterPage {
       </ion-header>,
       <ion-content class="ion-padding">
         <form
-          onSubmit={() => this.handleSubmit()}
+          onSubmit={(evt) => this.handleSubmit(evt)}
         >
           <ion-item>
             <ion-label>Email</ion-label>

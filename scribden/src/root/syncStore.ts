@@ -3,13 +3,13 @@ import { getConfig } from './environmentConfig';
 
 declare var jexia: any;
 
-// const dataModule = jexia.dataOperations();
-const ums = new jexia.UMSModule();
+const dataModule = jexia.dataOperations();
+const umsModule = new jexia.UMSModule();
 
 const credentials = getConfig();
 
 // jexia.jexiaClient().init(credentials as any, dataModule);
-jexia.jexiaClient().init(credentials as any, ums);
+jexia.jexiaClient().init(credentials as any, umsModule, dataModule);
 
-// export const db = dataModule;
-export const db = ums;
+export const db = dataModule;
+export const ums = umsModule;

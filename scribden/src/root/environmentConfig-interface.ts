@@ -1,7 +1,7 @@
 export interface EnvironmentConfig {
-  projectURL: string,
+  projectURL?: string,
   projectID: string,
-  key: string,
-  secret: string,
-  zone: string
+  key?: string,
+  secret?: string,
+  zone?: string
 }

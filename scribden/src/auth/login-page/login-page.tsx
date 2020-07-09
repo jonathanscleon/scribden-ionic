@@ -14,7 +14,9 @@ export class LoginPage {
     this.form[label] = evt.target.value;
   }
 
-  handleSubmit() {
+  handleSubmit(evt) {
+    evt.preventDefault();
+    
     const navigate = (page: string) => {
       document.querySelector('ion-router').componentOnReady().then(router => {
         router.push(`/${page}`);
@@ -33,7 +35,7 @@ export class LoginPage {
       </ion-header>,
       <ion-content class="ion-padding">
         <form
-          onSubmit={() => this.handleSubmit()}
+          onSubmit={(evt) => this.handleSubmit(evt)}
         >
           <ion-item>
             <ion-label>Email</ion-label>
