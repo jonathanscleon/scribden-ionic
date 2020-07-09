@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "build": "stencil build",
-    "start": "stencil build --dev --watch --serve",
+    "dev": "stencil build --dev --watch --serve",
+    "prod": "http-server ./www -p 80",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watch",
     "generate": "stencil generate"
@@ -23,6 +24,7 @@
     "@capacitor/ios": "^2.2.0"
   },
   "dependencies": {
+    "http-server": "^0.12.3",
     "mudder": "^1.0.9"
   }
 }
