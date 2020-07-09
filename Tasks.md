@@ -22,33 +22,6 @@
 //////////////////////////////////////////////////
 
 //////////////////////////////////////////////////
-// Ticket: SD-8
-// Name: Deploy test iOS app
-// Status: Queue
-// Tag: #function
-// Description: Use XCode to deploy app to my
-// device.
-//
-// Acceptance:
-// 1. Application works from the device.
-//////////////////////////////////////////////////
-
-//////////////////////////////////////////////////
-// Ticket: SD-29
-// Name: Configure builds
-// Status: Queue
-// Tag: #function
-// Description: Configure repo so that web and
-// app deployments can be done easily.
-//
-// Acceptance:
-// 1. Web can be deployed reliably and separately
-//    from app.
-// 2. App can be deployed reliably and separately
-//    from web.
-//////////////////////////////////////////////////
-
-//////////////////////////////////////////////////
 // Ticket: SD-30
 // Name: Request email confirmation
 // Status: Queue
@@ -432,3 +405,29 @@
 // 1. Repo license is more commercial
 //////////////////////////////////////////////////
 
+//////////////////////////////////////////////////
+// Ticket: SD-37
+// Name: All forms can be submitted with keyboard
+// Status: Queue
+// Tag: #mvp
+// Description: Issues were found with login and
+// register forms when trying to submit the form
+// with keyboard. Item too.
+//
+// Acceptance:
+// 1. Hitting enter on any form submits the form
+//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////
+// Ticket: SD-38
+// Name: Redirect from home to login when not
+//       authorized
+// Status: Queue
+// Tag: #mvp
+// Description: 
+//
+// Acceptance:
+// 1. When not authenticated, reroute all route
+//    requests that require authentication to the
+//    login page.
+//////////////////////////////////////////////////

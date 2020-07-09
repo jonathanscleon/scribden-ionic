@@ -94,3 +94,30 @@
 // 
 // Rejection reason: SD-1 rejected.
 //////////////////////////////////////////////////
+
+//////////////////////////////////////////////////
+// Ticket: SD-8
+// Name: Deploy test iOS app
+// Status: Done
+// Tag: #function
+// Description: Use XCode to deploy app to my
+// device.
+//
+// Acceptance:
+// 1. Application works from the device.
+//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////
+// Ticket: SD-29
+// Name: Configure builds
+// Status: Done
+// Tag: #function
+// Description: Configure repo so that web and
+// app deployments can be done easily.
+//
+// Acceptance:
+// 1. Web can be deployed reliably and separately
+//    from app.
+// 2. App can be deployed reliably and separately
+//    from web.
+//////////////////////////////////////////////////

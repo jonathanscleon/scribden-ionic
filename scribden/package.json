@@ -9,6 +9,8 @@
   ],
   "scripts": {
     "build": "stencil build",
+    "ios-init": "cap add ios && cap copy ios && cap open ios",
+    "android-init": "cap add android && cap copy android && cap open android",
     "ios-build": "cap copy ios && cap open ios",
     "android-build": "cap copy android && cap open android",
     "dev": "stencil build --dev --watch --serve",
