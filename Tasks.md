@@ -399,6 +399,38 @@
 // 1. Using a new API key
 //////////////////////////////////////////////////
 
+//////////////////////////////////////////////////
+// Ticket: SD-34
+// Name: Rename repo
+// Status: Queue
+// Tag: #tech-debt
+// Description: 
+//
+// Acceptance:
+// 1. Rename repo
+//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////
+// Ticket: SD-35
+// Name: Move repo to Hexelberry org
+// Status: Queue
+// Tag: #tech-debt
+// Description: 
+//
+// Acceptance:
+// 1. Repo is under Hexelberry org
+//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////
+// Ticket: SD-36
+// Name: Update repo license
+// Status: Queue
+// Tag: #tech-debt
+// Description: Repo license should be restrictive
+//
+// Acceptance:
+// 1. Repo license is more commercial
+//////////////////////////////////////////////////
 
 **************************************************
 **************************************************
