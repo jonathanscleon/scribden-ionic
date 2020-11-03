@@ -1,5 +1,3 @@
-[![Runme](https://runme.io/static/button.svg)](https://runme.io/run?app_id=143ea8e6-4091-4eb7-900d-386459196717)
-
 # scribden-ionic
 
 ## Bugs
